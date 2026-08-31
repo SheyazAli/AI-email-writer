@@ -19,19 +19,26 @@ app.use(express.json());
 
 
 app.post("/api/generate", async (req, res) => {
-    const { prompt } = req.body;
+    try {
+        const { prompt } = req.body;
 
-    console.log("User prompt:", prompt);
+        const response = await openai.responses.create({
+            model: "gpt-5.4-mini",
+            instructions: "You are a professional email writing assistant.",
+            input: prompt
+        });
 
-    const response = await openai.responses.create({
-        model: "gpt-5.4-mini",
-        instructions: "You are a professional email writing assistant.",
-        input: prompt
-    });
+        res.json({
+            output: response.output_text
+        });
 
-    res.json({
-        output: response.output_text
-    });
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            error: "Failed to generate email"
+        });
+    }
 });
 
 

@@ -3,10 +3,11 @@ import { EmailContext } from "../Context/EmailContext";
 
 const EmailOutput = () => {
 
-    const { output, setOutput } = useContext(EmailContext);
+    const { output, setOutput, setPrompt } = useContext(EmailContext);
 
     const handleGenerateNew = () => {
         setOutput("");
+        setPrompt("")
     };
 
     if (!output) {
