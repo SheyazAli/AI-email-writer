@@ -2,12 +2,13 @@ import React, { useState, useContext } from "react";
 import { EmailContext } from "../Context/EmailContext";
 
 const EmailInput = () => {
-    const { setOutput } = useContext(EmailContext);
-
-    const [prompt, setPrompt] = useState("");
+    const { setOutput, prompt, setPrompt } = useContext(EmailContext);
+    const [isLoading, setIsLoading] = useState(false);
 
 const handleGenerate = async () => {
-    console.log(prompt);
+    // console.log(prompt);
+    setIsLoading(true);
+
 
     const response = await fetch("http://localhost:5000/api/generate", {
         method: "POST",
@@ -21,9 +22,12 @@ const handleGenerate = async () => {
 
     const data = await response.json();
 
-    console.log(data);
+    // console.log(data);
     
     setOutput(data.output);
+
+    setIsLoading(false);
+
 };
 
     return (
@@ -56,7 +60,7 @@ const handleGenerate = async () => {
                     className="generate-button"
                     onClick={handleGenerate}
                 >
-                    Generate
+                    {isLoading ? "Generating..." : "Generate"}
                 </button>
 
             </div>
