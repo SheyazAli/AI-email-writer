@@ -1,0 +1,300 @@
+.home {
+    min-height: 100vh;
+    background-color: #111217;
+    color: white;
+}
+
+
+/* =========================
+   Header
+========================= */
+
+header {
+    padding: 20px 40px;
+}
+
+.main-header {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+}
+
+
+/* =========================
+   Main
+========================= */
+
+main {
+    min-height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 40px 20px;
+    box-sizing: border-box;
+
+    gap: 20px;
+}
+
+
+/* =========================
+   Email Input
+========================= */
+
+.email-input {
+    width: 100%;
+    max-width: 750px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* Heading */
+
+.header {
+    font-size: 48px;
+    font-weight: 400;
+
+    margin: 0 0 10px;
+}
+
+.sub-header {
+    color: #8f9098;
+    font-size: 17px;
+
+    margin: 0 0 30px;
+}
+
+
+/* =========================
+   Input Wrapper
+========================= */
+
+.input-wrapper {
+    width: 100%;
+    min-height: 65px;
+
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+
+    padding: 8px 10px;
+
+    background-color: #1b1c22;
+
+    border: 1px solid #30313a;
+    border-radius: 40px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+/* Plus Button */
+
+.add-button {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    margin: 0;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 28px;
+    font-weight: 300;
+
+    cursor: pointer;
+}
+
+.add-button:hover {
+    background: transparent;
+    color: #d0d0d5;
+}
+
+
+/* Textarea */
+
+.input-box {
+    flex: 1;
+
+    height: 45px;
+
+    min-height: 45px;
+
+    padding: 12px 10px;
+
+    box-sizing: border-box;
+
+    background: transparent;
+
+    color: white;
+
+    border: none;
+
+    outline: none;
+
+    resize: none;
+
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.input-box::placeholder {
+    color: #777983;
+}
+
+
+/* Generate Button */
+
+.generate-button {
+    flex-shrink: 0;
+
+    margin: 0;
+
+    padding: 11px 20px;
+
+    border: none;
+
+    border-radius: 25px;
+
+    background-color: #e8e6ed;
+
+    color: #111217;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.generate-button:hover {
+    background-color: white;
+}
+
+
+/* =========================
+   Generated Email
+========================= */
+
+.output-area {
+    width: 100%;
+    max-width: 750px;
+
+    margin-bottom: 25px;
+
+    padding: 25px;
+
+    box-sizing: border-box;
+
+    background-color: #1b1c22;
+
+    border: 1px solid #30313a;
+
+    border-radius: 24px;
+
+    text-align: left;
+}
+
+
+/* Output Heading */
+
+.output-area h2 {
+    margin: 0 0 20px;
+
+    font-size: 20px;
+    font-weight: 500;
+}
+
+
+/* Output Text */
+
+.output-area p {
+    margin: 0;
+
+    color: #d4d4d8;
+
+    font-size: 16px;
+    line-height: 1.7;
+
+    white-space: pre-line;
+}
+
+
+/* =========================
+   Generate New Button
+========================= */
+
+.generate-new-button {
+    display: block;
+
+    margin: 25px auto 0;
+
+    padding: 11px 20px;
+
+    border: 1px solid #3a3b45;
+
+    border-radius: 25px;
+
+    background-color: transparent;
+
+    color: #d4d4d8;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+.generate-new-button:hover {
+    background-color: #292a32;
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 700px) {
+
+    header {
+        padding: 20px;
+    }
+
+    main {
+        padding: 30px 15px;
+    }
+
+    .header {
+        font-size: 36px;
+    }
+
+    .sub-header {
+        font-size: 15px;
+    }
+
+    .input-wrapper {
+        min-height: 60px;
+    }
+
+    .input-box {
+        font-size: 14px;
+    }
+
+    .generate-button {
+        padding: 10px 15px;
+    }
+
+}
