@@ -3,23 +3,38 @@ import { EmailContext } from "../Context/EmailContext";
 
 const EmailOutput = () => {
 
-    const { output, setOutput, setPrompt } = useContext(EmailContext);
+    const { messages, setMessages, setPrompt } = useContext(EmailContext);
 
     const handleGenerateNew = () => {
-        setOutput("");
-        setPrompt("")
+        setMessages([]);
+        setPrompt("");
     };
 
-    if (!output) {
+    if (messages.length === 0) {
         return null;
     }
 
     return (
         <div className="output-area">
 
-            <h2>Generated Email</h2>
+            <h2>Conversation</h2>
 
-            <p>{output}</p>
+                {messages.map((message, index) => (
+                    <div
+                        key={index}
+                        className={`chat-message ${
+                            message.role === "user" ? "user-message" : "ai-message"
+                        }`}
+                    >
+                        <div className="message-name">
+                            {message.role === "user" ? "You" : "Zoe"}
+                        </div>
+
+                        <div className="message-content">
+                            {message.content}
+                        </div>
+                    </div>
+                ))}
 
             <button
                 className="generate-new-button"
