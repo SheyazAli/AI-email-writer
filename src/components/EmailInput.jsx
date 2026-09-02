@@ -2,33 +2,44 @@ import React, { useState, useContext } from "react";
 import { EmailContext } from "../Context/EmailContext";
 
 const EmailInput = () => {
-    const { setOutput, prompt, setPrompt } = useContext(EmailContext);
+    const { messages, setMessages, prompt, setPrompt } = useContext(EmailContext);
+
     const [isLoading, setIsLoading] = useState(false);
 
-const handleGenerate = async () => {
-    // console.log(prompt);
-    setIsLoading(true);
 
+    const handleGenerate = async () => {
+        setIsLoading(true);
 
-    const response = await fetch("http://localhost:5000/api/generate", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            prompt: prompt
-        })
-    });
+        const userMessage = {
+            role: "user",
+            content: prompt //Create the user's message
+        };
 
-    const data = await response.json();
+        const updatedMessages = [...messages, userMessage]; //This is how Zoe remembers the conversation
 
-    // console.log(data);
-    
-    setOutput(data.output);
+        const response = await fetch("http://localhost:5000/api/generate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                messages: updatedMessages
+            })
+        });
 
-    setIsLoading(false);
+        const data = await response.json();
 
-};
+        const aiMessage = {
+            role: "assistant",
+            content: data.output
+        };
+
+        setMessages([...updatedMessages, aiMessage]); //save convo
+
+        setPrompt("");
+
+        setIsLoading(false);
+    };
 
     return (
         <div className="email-input">
@@ -40,7 +51,7 @@ const handleGenerate = async () => {
                     </h4>
 
                     <p className="sub-header">
-                        Let AI help you write the perfect email.
+                        Hi, I am ZOE. How can I help you today?
                     </p>
                 </>
             )}
@@ -59,6 +70,7 @@ const handleGenerate = async () => {
                 <button
                     className="generate-button"
                     onClick={handleGenerate}
+                    disabled={isLoading}
                 >
                     {isLoading ? "Generating..." : "Generate"}
                 </button>
