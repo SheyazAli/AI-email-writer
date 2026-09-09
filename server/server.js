@@ -21,10 +21,11 @@ app.post("/api/generate", async (req, res) => {
 
     } catch (error) {
         console.error(error);
-
-        res.status(500).json({
-            error: "Failed to generate email"
-        });
+        const status = error.status === 429 ? 429 : 500;
+        const message = error.status === 429
+            ? "Rate limit exceeded. Please wait a moment before trying again."
+            : "Failed to generate email";
+        res.status(status).json({ error: message });
     }
 });
 
