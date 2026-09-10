@@ -1,6 +1,6 @@
 import { Emailplanner } from "./planner.js";
-import { Emailexecutor } from "./executor.js"
-import { Emailvalidator } from "./validator.js"
+import { Emailexecutor } from "./executor.js";
+import { Emailvalidator } from "./validator.js";
 
 export async function generateEmail(messages) {
 
@@ -10,9 +10,25 @@ export async function generateEmail(messages) {
         return planner.replace("OFF_TOPIC:", "").trim();
     }
 
-    const executor = await Emailexecutor(planner)
+    const executor = await Emailexecutor(planner);
 
-    const validator = await Emailvalidator(executor)
+    const validator = await Emailvalidator(executor);
 
-    return validator;
+
+    if (validator.startsWith("REQUIRED_CHANGES:")) {
+
+        const improvedEmail = await Emailexecutor(`
+            Original email:
+            ${executor}
+
+            Validator feedback:
+            ${validator}
+
+            Improve the original email according to the validator feedback.
+        `);
+
+        return improvedEmail;
+    }
+
+    return executor;
 }

@@ -1,20 +1,30 @@
 import gemini from "../config/gemini.js";
+import dotenv from "dotenv";
+dotenv.config();
 
-export async function Emailexecutor(Plannerresponse) {
+export async function Emailexecutor(instruction) {
 
-    const Executorresponce = await gemini.interactions.create({
-        model: "gemini-3.7-flash",
+    const Executorresponse = await gemini.interactions.create({
+        model: process.env.GEMINI_MODEL,
 
         input: `
-            Here is the plan created by the Planner:
+            You are the Executor of Zoe, an AI email assistant.
 
-            ${Plannerresponse}
+            Follow the instruction below and produce ONLY the final email.
 
-            Execute this plan and produce the final email.
+            Instruction:
+            ${instruction}
+
+            If the instruction contains validator feedback,
+            improve the email according to that feedback.
+
+            Do not explain your process.
+            Do not mention the validator.
+            Return only the final email.
         `
     });
 
-    console.log(Executorresponce.output_text)
+    console.log("Executor:", Executorresponse.output_text);
 
-    return Executorresponce.output_text;
+    return Executorresponse.output_text;
 }

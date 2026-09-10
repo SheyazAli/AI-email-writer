@@ -1,4 +1,6 @@
 import gemini from "../config/gemini.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 export async function Emailplanner(messages) {
 
@@ -7,7 +9,7 @@ export async function Emailplanner(messages) {
         .join("\n");
 
     const Plannerresponse = await gemini.interactions.create({
-        model: "gemini-3.5-flash-lite",
+        model: process.env.GEMINI_MODEL,
 
         input: `
             You are the planning component of Zoe.
