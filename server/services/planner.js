@@ -23,6 +23,12 @@ export async function Emailplanner(messages) {
             Analyze the user's request and create a plan
             for completing the task.
 
+            If the request requires information from company policy, mark the plan with:
+            NEEDS_RAG: true
+
+            Otherwise mark the plan with:
+            NEEDS_RAG: false
+
             Do not write the final email.
             Only create the plan.
 
@@ -39,5 +45,5 @@ export async function Emailplanner(messages) {
 
     console.log(responseText);
 
-    return responseText;
+    return responseText
 }
