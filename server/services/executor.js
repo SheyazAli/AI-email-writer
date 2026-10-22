@@ -6,22 +6,19 @@ import { getWeather } from "../tools/weather.js";
 
 const tools = [
     {
-        functionDeclarations: [
-            {
-                name: "get_weather",
-                description: "Get the current weather for a city.",
-                parameters: {
-                    type: "object",
-                    properties: {
-                        location: {
-                            type: "string",
-                            description: "The city or location to get the weather for."
-                        }
-                    },
-                    required: ["location"]
+        type: "function",
+        name: "get_weather",
+        description: "Get the current weather for a city.",
+        parameters: {
+            type: "object",
+            properties: {
+                location: {
+                    type: "string",
+                    description: "The city or location to get the weather for."
                 }
-            }
-        ]
+            },
+            required: ["location"]
+        }
     }
 ];
 
@@ -73,7 +70,7 @@ export async function Emailexecutor(instruction) {
 
         if (toolCall.name === "get_weather") {
 
-            const { location } = JSON.parse(toolCall.arguments);
+            const { location } = toolCall.arguments;
 
             const weather = await getWeather(location);
 

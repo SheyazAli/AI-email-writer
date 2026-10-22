@@ -5,6 +5,7 @@ import ragServices from "../rag/ragService.js";
 
 export async function generateEmail(messages) {
 
+
     const planner = await Emailplanner(messages);
 
     if (planner.startsWith("OFF_TOPIC:")) {

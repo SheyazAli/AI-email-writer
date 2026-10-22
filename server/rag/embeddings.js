@@ -1,4 +1,6 @@
 import gemini from "../config/gemini.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 export async function createEmbedding(text) {
 
